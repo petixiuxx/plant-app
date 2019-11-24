@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { StyleSheet, TextInput } from "react-native";
-import { Icon } from "expo";
+import { Ionicons } from "@expo/vector-icons";
 import Text from "./Text";
 import Block from "./Block";
 import Button from "./Button";
@@ -33,7 +33,7 @@ export default function Input(props) {
         {rightLabel ? (
           rightLabel
         ) : (
-          <Icon.Ionicons
+          <Ionicons
             color={theme.colors.gray}
             size={theme.sizes.font * 1.35}
             name={!toggleSecure ? "md-eye" : "md-eye-off"}

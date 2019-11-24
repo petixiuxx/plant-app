@@ -13,7 +13,8 @@ module.exports = {
     }
   },
   rules: {
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-unescaped-entities": "off"
   },
   plugins: ["react"],
   extends: [
