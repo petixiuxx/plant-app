@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  ActivityIndicator,
+  Keyboard
+} from "react-native";
 import { Button, Block, Text, Input } from "../components";
 import { theme } from "../constants";
 import { useNavigation } from "react-navigation-hooks";
@@ -16,12 +21,15 @@ function Login() {
 
   function handleLogin() {
     const error = [];
+    Keyboard.dismiss();
     setLoading(true);
-    email !== VALID_EMAIL && error.push("email");
-    password !== VALID_PASSWORD && error.push("password");
-    setErrors(error);
-    setLoading(false);
-    !errors.length && navigate("Browse");
+    setTimeout(() => {
+      email !== VALID_EMAIL && error.push("email");
+      password !== VALID_PASSWORD && error.push("password");
+      setErrors(error);
+      setLoading(false);
+      !errors.length && navigate("Browse");
+    }, 2000);
   }
   const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
@@ -48,11 +56,19 @@ function Login() {
             onChangeText={text => setPassword(text)}
           />
           <Button gradient onPress={() => handleLogin()}>
-            <Text bold white center>
-              Login
-            </Text>
+            {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text bold white center>
+                Login
+              </Text>
+            )}
           </Button>
-          <Button onPress={() => {}}>
+          <Button
+            onPress={() => {
+              navigate("Forgot");
+            }}
+          >
             <Text
               gray
               caption
